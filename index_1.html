@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Votre Entreprise — Construction, Menuiserie & Décoration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15130F;
+    --ink-soft:#3A362C;
+    --paper:#FFFFFF;
+    --cream:#F6F4EE;
+    --gold:#F2B705;
+    --gold-deep:#C99A04;
+    --line:rgba(21,19,15,0.14);
+  }
+  html{color-scheme:light; background:var(--cream);}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--cream); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.6; font-size:16px;}
+  h1,h2,h3{font-family:'Big Shoulders Display',sans-serif; text-transform:uppercase; line-height:0.92; color:var(--ink);}
+  .mono{font-family:'IBM Plex Mono',monospace; letter-spacing:0.04em;}
+  a{color:inherit; text-decoration:none;} img{max-width:100%;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--gold); color:var(--ink);}
+
+  /* hazard stripe — signature construction-site motif */
+  .hazard{
+    height:10px;
+    background:repeating-linear-gradient(135deg, var(--ink) 0 14px, var(--gold) 14px 28px);
+  }
+
+  header{position:sticky; top:0; z-index:50; background:rgba(21,19,15,0.96); backdrop-filter:blur(6px);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 32px;}
+  .logo{display:flex; align-items:center; gap:10px; font-family:'Big Shoulders Display'; font-weight:900; font-size:22px; color:#fff; text-transform:uppercase; line-height:0.95;}
+  .logo .l1{color:var(--gold); font-size:13px; letter-spacing:0.1em; display:block;}
+  .logo .l2{display:block;}
+  .logo-icon{width:30px; height:24px; position:relative; flex-shrink:0;}
+  .logo-icon::before, .logo-icon::after{
+    content:""; position:absolute; left:50%; width:26px; height:4px; background:var(--gold);
+    transform:translateX(-50%);
+  }
+  .logo-icon::before{top:0; clip-path:polygon(50% 0, 100% 100%, 0 100%);}
+  .logo-icon::after{top:9px; clip-path:polygon(50% 0, 100% 100%, 0 100%); background:#fff;}
+  nav.links{display:flex; gap:28px; font-size:14px; font-weight:600; color:#EDEAE0;}
+  nav.links a:hover{color:var(--gold);}
+  .nav-cta{background:var(--gold); color:var(--ink); padding:10px 18px; font-size:13px; font-weight:700; font-family:'IBM Plex Mono';}
+
+  .hero{position:relative; background:var(--ink); color:#fff; padding:80px 0 60px; overflow:hidden;}
+  .hero::before{
+    content:""; position:absolute; right:-120px; top:-120px; width:480px; height:480px;
+    background:radial-gradient(circle, rgba(242,183,5,0.25), transparent 70%);
+  }
+  .eyebrow{display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono'; font-size:12.5px; color:var(--gold); text-transform:uppercase; letter-spacing:.12em; margin-bottom:20px;}
+  .eyebrow::before{content:""; width:26px; height:1px; background:var(--gold);}
+  h1.hero-title{font-size:clamp(38px,6vw,76px); font-weight:900; position:relative; z-index:1;}
+  h1.hero-title .accent{color:var(--gold);}
+  .hero p.lead{max-width:500px; color:#CFCABC; margin-top:20px; font-size:16px; position:relative; z-index:1;}
+  .hero-buttons{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; position:relative; z-index:1;}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:14px 24px; font-size:14px; font-weight:700; font-family:'IBM Plex Mono'; cursor:pointer; border:1px solid transparent;}
+  .btn-gold{background:var(--gold); color:var(--ink);}
+  .btn-gold:hover{background:#fff;}
+  .btn-outline-light{border-color:rgba(255,255,255,0.4); color:#fff;}
+  .btn-outline-light:hover{border-color:#fff; background:rgba(255,255,255,0.08);}
+
+  /* Trade switcher — signature interactive element */
+  .trade-switch{position:relative; z-index:1; margin-top:40px;}
+  .trade-switch .ts-label{font-family:'IBM Plex Mono'; font-size:12px; color:#8A8574; text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; display:block;}
+  .ts-chips{display:flex; gap:10px; flex-wrap:wrap;}
+  .ts-chip{
+    padding:10px 18px; border:1px solid rgba(255,255,255,0.25); color:#CFCABC;
+    font-family:'IBM Plex Mono'; font-size:13px; transition:all 0.15s ease;
+  }
+  .ts-chip:hover{border-color:rgba(255,255,255,0.5); color:#fff;}
+  .ts-chip.active{background:var(--gold); border-color:var(--gold); color:var(--ink); font-weight:700;}
+  .ts-line{margin-top:16px; font-size:14.5px; color:#EDEAE0; max-width:480px; min-height:44px;}
+
+  .contact-strip{
+    display:flex; gap:28px; flex-wrap:wrap; margin-top:36px; padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.15); position:relative; z-index:1;
+    font-family:'IBM Plex Mono'; font-size:13px; color:#CFCABC;
+  }
+
+  .section{padding:76px 0; border-bottom:1px solid var(--line);}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; margin-bottom:40px;}
+  .section-num{font-family:'IBM Plex Mono'; font-size:12.5px; color:var(--gold-deep); display:block; margin-bottom:8px;}
+  .section-head h2{font-size:clamp(30px,4vw,48px);}
+  .section-head p{max-width:400px; font-size:14.5px; color:var(--ink-soft);}
+
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .service-item{background:var(--paper); padding:26px 20px; min-height:158px; display:flex; flex-direction:column; justify-content:space-between; transition:opacity 0.2s ease;}
+  .service-item .num{font-family:'IBM Plex Mono'; font-size:11px; color:var(--gold-deep);}
+  .service-item h4{font-family:'Big Shoulders Display'; font-size:21px; margin-top:16px;}
+  .service-item p{font-size:13px; color:var(--ink-soft); margin-top:8px;}
+  .service-item.dim{opacity:0.35;}
+
+  .projects-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .project-card{position:relative; aspect-ratio:4/5; overflow:hidden; display:flex; align-items:flex-end; padding:18px; transition:opacity 0.2s ease;}
+  .project-card .label{font-family:'IBM Plex Mono'; font-size:11.5px; color:#fff; position:relative; z-index:2;}
+  .project-card .tag{
+    position:absolute; top:14px; left:14px; z-index:2; font-family:'IBM Plex Mono'; font-size:10px;
+    text-transform:uppercase; letter-spacing:.06em; color:var(--ink); background:var(--gold);
+    padding:4px 8px;
+  }
+  .project-card::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(21,19,15,0) 40%, rgba(21,19,15,0.85) 100%);}
+  .project-card.dim{opacity:0.3;}
+  .b1{background:linear-gradient(135deg,#2B2A26,#F2B705 130%);}
+  .b2{background:linear-gradient(135deg,#3E3A30,#8A7A50);}
+  .b3{background:linear-gradient(135deg,#4A5A66,#1C1A16);}
+  .b4{background:linear-gradient(135deg,#726038,#2B2A26);}
+  .b5{background:linear-gradient(135deg,#5C4E2E,#1C1A16);}
+  .b6{background:linear-gradient(135deg,#8A6E2E,#15130F);}
+
+  .about{background:var(--ink); color:#fff; padding:76px 0;}
+  .about h2{color:#fff;}
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;}
+  .about p{color:#CFCABC; font-size:15px; margin-bottom:16px; max-width:460px;}
+  .stat-row{display:flex; gap:40px; margin-top:20px; flex-wrap:wrap;}
+  .stat h3{font-size:38px; color:var(--gold);}
+  .stat span{font-family:'IBM Plex Mono'; font-size:11px; color:#CFCABC; text-transform:uppercase; letter-spacing:.06em;}
+
+  .contact{background:var(--cream); padding:76px 0;}
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:start;}
+  .contact-list{list-style:none; margin-top:24px;}
+  .contact-list li{display:flex; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); font-size:15px;}
+  .contact-list .k{font-family:'IBM Plex Mono'; font-size:11.5px; color:var(--gold-deep); text-transform:uppercase; width:110px; flex-shrink:0;}
+  .quote-box{background:var(--ink); color:#fff; padding:32px;}
+  .quote-box h3{color:#fff; font-size:26px; margin-bottom:12px;}
+  .quote-box p{font-size:13.5px; color:#CFCABC; margin-bottom:20px;}
+  .field{width:100%; background:transparent; border:none; border-bottom:1px solid rgba(255,255,255,0.3); color:#fff; font-family:'Inter'; font-size:14px; padding:10px 0; margin-bottom:16px;}
+  .field::placeholder{color:#8A8574;}
+  .field:focus{outline:none; border-color:var(--gold);}
+
+  footer{background:var(--ink); color:#8A8574; padding:28px 0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-family:'IBM Plex Mono'; font-size:11.5px;}
+
+  @media (max-width:860px){
+    nav.links{display:none;}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .projects-grid{grid-template-columns:1fr 1fr;}
+    .about-grid, .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .services-grid, .projects-grid{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;}}
+  a:focus-visible, button:focus-visible, .field:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav wrap">
+    <div class="logo">
+      <span class="logo-icon"></span>
+      <span><span class="l1">votre</span><span class="l2">ENTREPRISE</span></span>
+    </div>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#apropos">À propos</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Demander un devis</a>
+  </div>
+</header>
+<div class="hazard"></div>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Construction · Menuiserie · Décoration — Dakar, Sénégal</span>
+    <h1 class="hero-title">Bâtir.<br>Aménager.<br><span class="accent">Sublimer.</span></h1>
+    <p class="lead">Un seul site pour présenter tout un corps de métier du BTP — que vous coulez des fondations, posiez des portails, ou peigniez le dernier mur.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn btn-gold">Demander un devis →</a>
+      <a href="#realisations" class="btn btn-outline-light">Voir nos réalisations</a>
+    </div>
+
+    <div class="trade-switch">
+      <span class="ts-label">Vous êtes plutôt ?</span>
+      <div class="ts-chips" role="tablist">
+        <button class="ts-chip active" data-trade="gros">Gros œuvre</button>
+        <button class="ts-chip" data-trade="menuiserie">Menuiserie &amp; portails</button>
+        <button class="ts-chip" data-trade="deco">Peinture &amp; décoration</button>
+      </div>
+      <p class="ts-line" id="ts-line">Chantiers, fondations, structure — ce site met en avant la solidité de vos réalisations, du premier coup de pioche à la livraison.</p>
+    </div>
+
+    <div class="contact-strip">
+      <span>📍 Dakar, Sénégal</span>
+      <span>📞 +221 77 000 00 00</span>
+      <span>@votreentreprise</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="section-num">01 — Prestations</span><h2>Nos services</h2></div>
+      <p>De la structure au dernier détail de finition, un seul interlocuteur — quel que soit votre métier.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-item" data-trade="gros"><span class="num mono">01</span><h4>Gros œuvre &amp; structure</h4><p>Fondations, maçonnerie, suivi de chantier.</p></div>
+      <div class="service-item" data-trade="gros"><span class="num mono">02</span><h4>Rénovation</h4><p>Transformation et mise aux normes de bâtiments existants.</p></div>
+      <div class="service-item" data-trade="menuiserie"><span class="num mono">03</span><h4>Menuiserie, portes &amp; portails</h4><p>Portails motorisés, fenêtres et portes sur-mesure.</p></div>
+      <div class="service-item" data-trade="deco"><span class="num mono">04</span><h4>Peinture &amp; décoration</h4><p>Intérieur, extérieur, finitions premium.</p></div>
+      <div class="service-item" data-trade="deco"><span class="num mono">05</span><h4>Revêtements &amp; finitions</h4><p>Carrelage, enduits décoratifs, effets marbre.</p></div>
+      <div class="service-item" data-trade="all"><span class="num mono">06</span><h4>Accompagnement projet</h4><p>De l'idée à la livraison, un suivi à chaque étape.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="realisations">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="section-num">02 — Portfolio</span><h2>Réalisations</h2></div>
+      <p>Structure, menuiserie, finitions — chaque métier a sa vitrine.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card b1" data-trade="gros"><span class="tag">Gros œuvre</span><span class="label">BÂTIR AUJOURD'HUI, CONSTRUIRE DEMAIN</span></div>
+      <div class="project-card b2" data-trade="gros"><span class="tag">Rénovation</span><span class="label">CONSTRUIRE SA MAISON — SUIVI COMPLET</span></div>
+      <div class="project-card b3" data-trade="menuiserie"><span class="tag">Menuiserie</span><span class="label">PORTAIL MOTORISÉ SUR-MESURE</span></div>
+      <div class="project-card b4" data-trade="menuiserie"><span class="tag">Menuiserie</span><span class="label">FENÊTRES &amp; VITRAGES PREMIUM</span></div>
+      <div class="project-card b5" data-trade="deco"><span class="tag">Décoration</span><span class="label">FINITION MURALE EFFET MARBRE</span></div>
+      <div class="project-card b6" data-trade="deco"><span class="tag">Décoration</span><span class="label">DÉCORATION INTÉRIEURE COMPLÈTE</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="apropos">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <span class="section-num" style="color:var(--gold)">03 — À propos</span>
+        <h2>Expertise. Qualité.<br>Engagement.</h2>
+      </div>
+      <div>
+        <p>Votre entreprise accompagne particuliers et professionnels sur des projets de construction, menuiserie et décoration, avec des équipes qualifiées et un engagement de relation de confiance — quel que soit votre corps de métier.</p>
+        <div class="stat-row">
+          <div class="stat"><h3>3</h3><span>Corps de métier couverts</span></div>
+          <div class="stat"><h3>500+</h3><span>Projets livrés</span></div>
+          <div class="stat"><h3>100%</h3><span>Suivi clé en main</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <span class="section-num">04 — Contact</span>
+        <h2 style="font-size:clamp(30px,4vw,44px);">Parlons de votre projet</h2>
+        <ul class="contact-list">
+          <li><span class="k">Téléphone</span> +221 77 000 00 00</li>
+          <li><span class="k">Adresse</span> Dakar — Sénégal</li>
+          <li><span class="k">Réseaux</span> @votreentreprise</li>
+          <li><span class="k">Activité</span> Construction / menuiserie / décoration</li>
+        </ul>
+      </div>
+      <div class="quote-box">
+        <h3>Demander un devis</h3>
+        <p>Décrivez votre projet, notre équipe revient vers vous rapidement.</p>
+        <input class="field" type="text" placeholder="Nom complet">
+        <input class="field" type="text" placeholder="Téléphone">
+        <input class="field" type="text" placeholder="Type de projet (construction, portail, peinture...)">
+        <a href="#" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:4px;">Envoyer la demande</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>© 2026 Votre Entreprise — Dakar, Sénégal</span>
+    <span>@votreentreprise · +221 77 000 00 00</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const lines = {
+    gros: "Chantiers, fondations, structure — ce site met en avant la solidité de vos réalisations, du premier coup de pioche à la livraison.",
+    menuiserie: "Portails motorisés, portes sur-mesure, fenêtres — donnez à voir la précision et le fini de votre travail.",
+    deco: "Peinture, enduits, aménagement intérieur — mettez en valeur le rendu final, ce qui vend vraiment votre savoir-faire."
+  };
+
+  const chips = document.querySelectorAll('.ts-chip');
+  const line = document.getElementById('ts-line');
+  const items = document.querySelectorAll('[data-trade]');
+
+  function setTrade(trade){
+    chips.forEach(c => c.classList.toggle('active', c.dataset.trade === trade));
+    line.textContent = lines[trade];
+    items.forEach(el=>{
+      if(el.classList.contains('ts-chip')) return;
+      const t = el.dataset.trade;
+      const match = (t === 'all' || t === trade);
+      el.classList.toggle('dim', !match);
+    });
+  }
+
+  chips.forEach(chip=>{
+    chip.addEventListener('click', ()=> setTrade(chip.dataset.trade));
+  });
+})();
+</script>
+
+</body>
+</html>
